@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="/docs/3.3/../favicon.ico">
 
-    <title>Fixed Top Navbar Example for Bootstrap</title>
+    <title>Portal Noticia</title>
 
     <!-- Bootstrap core CSS -->
     <link href="view/bootstrap3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -84,30 +84,40 @@
           </p>
 
 
+          <?php
+      include ("model/include.php");//trocar pelo banco de dados
+      $id = filter_input(INPUT_GET, "id");
+      //instanciar a classe noticia
+      //invocar o método buscarUm e passar o id como parâmetro, salvar o retorno na variável $noticia
+
+      foreach($noticia as $value){
+        if ($value["id"]==$id){
+      ?>
           <div class="row">
             <div class="col-xs-6 col-lg-12">
-              <h2>Cientistas criam sistema que envia sons só ouvidos pelo receptor</h2>
-              <h5>Publicado em: XXXXX - Autor: yyyyyyyyy</h5>
-              <img src="view/imagens/noticia1.png" align="left" vspace="10px" hspace="10px"><p>Imagine que você queira ouvir alguém tentando conversar com você do outro lado de uma sala lotada; considerando o modo como as ondas de som se espalham, essa situação realmente não seria muito prática. Mas e se fosse possível projetar sons da mesma forma como a luz é projetada? 
-
-              Pesquisadores do MIT pensaram nesta situação e desenvolveram um sistema que é capaz de fazer isso, utilizando uma transmissão de áudio que pode ser "lançada" nos ouvidos de uma pessoa específica da mesma forma como um laser lança um raio de luz. Trata-se de um método preciso e seguro, que é capaz de transmitir música e até mesmo falas para a o alvo desejado - e o melhor de tudo: sem que outras pessoas ouçam o conteúdo.
-
-              Este sistema trabalha com a fotoacústica que, em linhas gerais, significa que as ondas sonoras são resultado de uma interação entre luz e matéria: a energia proveniente da luz faz a matéria vibrar, e o som depende destas vibrações materiais. Assim, a equipe de pesquisadores criou um sistema baseado em lasers que interagem com o vapor d'água presente no ar e, assim, geram o som audível em uma orientação bem definida, que é enviado do transmissor ao receptor.
-
-              Segundo Charles M. Wynn, pesquisador envolvido no projeto, este sistema poderia ser utilizado em distâncias razoáveis para enviar informações diretamente no ouvido de alguém sem espalhar o som. Trata-se do primeiro sistema que utiliza lasers completamente seguros para os olhos e pele para localizar um sinal audível para o alvo desejado.
-
-              Mas e se o ambiente não tiver muita umidade? Neste caso, também não há problemas: de acordo com o pesquisador, este sistema pode funcionar até mesmo nas condições climáticas mais secas, uma vez que sempre há um pouquinho de água no ar - principalmente perto de pessoas. A quantidade de água necessária para a aplicação desta tecnologia é pequena desde que, claro, sejam utilizados comprimentos de onda no laser que sejam absorvidos fortemente pela água.
-              </p>
-              <p><a class="btn btn-default" href="https://www.tecmundo.com.br/ciencia/138325-pesquisadores-criam-sistema-envia-sons-que-receptor-ouve.htm" role="button">View details &raquo;</a></p>
+              <h2><?php echo $value["titulo"]; ?></h2>
+              <h5>Publicado em: <?php 
+                  $date1 = new DateTime($value["dataCadastro"]);
+                  echo $date1->format('d/m/Y H:i:s'); ?> - Autor: <?php echo $value["autor"]; ?></h5>
+              <img src=<?php echo $value["imagem"]; ?> align="left" style="margin: 5px">
+              <p align="justify"><?php echo $value["descricao"]; ?></p>
+              <p>Fonte: <?php echo $value["fonte"]; ?></p>
             </div><!--/.col-xs-6.col-lg-4-->
           </div>
+      
+      <?php
+      }else{
+        //......
+      }
+    }
+      ?>
 
         </div><!--/.col-xs-12.col-sm-9-->
 
         <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
           <div class="list-group">
             <a href="#" class="list-group-item active">Newsletter</a>
-            <form class="form-signin" action="#" method="POST">
+            <form class="form-signin" action="controller/controllerNewsletter.php" method="POST">
                <div class="col-md-12">
                 <div class="row">
                   <div class="col-md-10">
@@ -124,7 +134,7 @@
                 <div class="row">
                   <div class="col-md-10">
                     <div class="checkbox">
-                      <input type="checkbox" name="" id="email" required>Desejo Receber
+                      <input type="checkbox" name="desejaReceber" value="1" id="desejaReceber">Desejo Receber
                     </div>
                   </div>             
                 </div>
@@ -133,7 +143,7 @@
             </form>  
           </div>  
         </div><!--/.sidebar-offcanvas-->
-        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+        <!--<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
           <div class="list-group">
             <a href="#" class="list-group-item active">Mais lidas</a>
             <a href="#" class="list-group-item">Cientistas criam sistema que envia sons só ouvidos pelo receptor</a>
@@ -146,8 +156,10 @@
             <a href="#" class="list-group-item">Link</a>
             <a href="#" class="list-group-item">Link</a>
           </div>  
-        </div><!--/.sidebar-offcanvas-->
-
+        </div>--><!--/.sidebar-offcanvas-->
+        <?php
+        include ("view/maisLidas.php");
+      ?>
     </div> <!-- /container -->
 
 

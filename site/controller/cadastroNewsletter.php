@@ -6,7 +6,8 @@ if(filter_input(INPUT_POST,"operacao")=="cadastrar"){
         $nome = filter_input(INPUT_POST,"nome");
         $email = filter_input(INPUT_POST,"email");
         $desejaReceber = filter_input(INPUT_POST,"desejaReceber");
-//aqui chamaremos a classe
+        $not = new Newsletter;
+        $not -> cadastrar($nome, $email, $desejaReceber);
     }else{
         echo "Erro entre View e Controller";
     }
@@ -16,7 +17,8 @@ if(filter_input(INPUT_POST,"operacao")=="cadastrar"){
         $nome = filter_input(INPUT_POST,"nome");
         $email = filter_input(INPUT_POST,"email");
         $desejaReceber = filter_input(INPUT_POST,"desejaReceber");
-//aqui chamaremos a classe
+        $not = new Newsletter;
+        $not -> alterar($id, $nome, $email, $desejaReceber);
     }else{
         echo "Erro entre View e Controller";
     }

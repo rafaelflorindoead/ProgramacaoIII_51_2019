@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="/docs/3.3/../favicon.ico">
 
-    <title>Fixed Top Navbar Example for Bootstrap</title>
+    <title>Portal Noticia</title>
 
     <!-- Bootstrap core CSS -->
     <link href="view/bootstrap3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -71,7 +71,7 @@
         </p> -->
           <h1>Notícias de Tecnologia</h1>
       </div>
-      
+  
       <div class="row row-offcanvas row-offcanvas-right">
         <div class="col-xs-12 col-sm-12">
         </div>
@@ -82,87 +82,40 @@
           <p class="pull-right visible-xs">
             <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
           </p>
+  
+          
+           
+    <?php
+      include ("model/include.php");
+      //instanciar a classe noticia
+      //invocar o método buscarTodos e salvar o retorno na variável $noticia
 
 
+      foreach($noticia as $value){
+      ?>
           <div class="row">
             <div class="col-xs-6 col-lg-12">
-              <h2>Cientistas criam sistema que envia sons só ouvidos pelo receptor</h2>
-              <h5>Publicado em: XXXXX - Autor: yyyyyyyyy</h5>
-              <img src="view/imagens/noticia1.png" align="left" vspace="10px" hspace="10px"><p>Imagine que você queira ouvir alguém tentando conversar com você do outro lado de uma sala lotada; considerando o modo como as ondas de som se espalham, essa situação realmente não seria muito prática. Mas e se fosse possível projetar sons da mesma forma como a luz é projetada? 
-
-              Pesquisadores do MIT pensaram nesta situação e desenvolveram um sistema que é capaz de fazer isso, utilizando uma transmissão de áudio que pode ser "lançada" nos ouvidos de uma pessoa específica da mesma forma como um laser lança um raio de luz. Trata-se de um método preciso e seguro, que é capaz de transmitir música e até mesmo falas para a o alvo desejado - e o melhor de tudo: sem que outras pessoas ouçam o conteúdo.
-
-              Este sistema trabalha com a fotoacústica que, em linhas gerais, significa que as ondas sonoras são resultado de uma interação entre luz e matéria: a energia proveniente da luz faz a matéria vibrar, e o som depende destas vibrações materiais. Assim, a equipe de pesquisadores criou um sistema baseado em lasers que interagem com o vapor d'água presente no ar e, assim, geram o som audível em uma orientação bem definida, que é enviado do transmissor ao receptor.
-
-              Segundo Charles M. Wynn, pesquisador envolvido no projeto, este sistema poderia ser utilizado em distâncias razoáveis para enviar informações diretamente no ouvido de alguém sem espalhar o som. Trata-se do primeiro sistema que utiliza lasers completamente seguros para os olhos e pele para localizar um sinal audível para o alvo desejado.
-
-              Mas e se o ambiente não tiver muita umidade? Neste caso, também não há problemas: de acordo com o pesquisador, este sistema pode funcionar até mesmo nas condições climáticas mais secas, uma vez que sempre há um pouquinho de água no ar - principalmente perto de pessoas. A quantidade de água necessária para a aplicação desta tecnologia é pequena desde que, claro, sejam utilizados comprimentos de onda no laser que sejam absorvidos fortemente pela água.
-              </p>
-              <p><a class="btn btn-default" href="https://www.tecmundo.com.br/ciencia/138325-pesquisadores-criam-sistema-envia-sons-que-receptor-ouve.htm" role="button">View details &raquo;</a></p>
+              <h2><?php echo $value["titulo"]; ?></h2>
+              <h5>Publicado em: <?php 
+                  $date1 = new DateTime($value["dataCadastro"]);
+                  echo $date1->format('d/m/Y H:i:s'); ?> - Autor: <?php echo $value["autor"]; ?></h5>
+              <img src=<?php echo $value["imagem"]; ?> align="left" width = "200px" heigth="200px" style="margin: 5px">
+              <p align="justify"><?php $mensagem = $value["descricao"]; 
+              echo substr($mensagem, 0, 600); ?>...</p>
+              <p>Fonte: <?php echo $value["fonte"]; ?></p>
+              <p><a class="btn btn-default" href="pg2.php?id=<?php echo $value["id"];?>" role="button">Ver mais&raquo;</a></p>
             </div><!--/.col-xs-6.col-lg-4-->
           </div>
-          <div class="row">
-            <div class="col-xs-6 col-lg-12">
-              <h2>Cientistas transformam spinners em centrífugas para bancos de sangue</h2>
-              <h5>Publicado em: XXXXX - Autor: yyyyyyyyy</h5>
-              <img src="view/imagens/noticia2.png" align="left" vspace="10px" hspace="10px">
-              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. 
-
-              Ok, é verdade que os as pessoas acabaram superando os fidget spinners - principalmente depois que de tanta gente fazendo questão de mostrar que não havia tanta graça neles. Contudo, cientistas taiwaneses descobriram um novo propósito para estes objetos: eles transformaram os spinners em centrífugas de baixo custo para que funcionários da área da saúde em locais com más condições possam separar os componentes principais do sangue - o plasma e os glóbulos vermelhos -  com mais facilidade.
-
-              O plasma é utilizado para avaliar condições como HIV, hepatite e problemas de nutrição. Acontece que, geralmente, esta separação é feita com centrífugas caras que funcionam com energia elétrica, para poderem girar rápido o suficiente para criar a força centrífuga necessária. Assim, os pesquisadores da Universidade Nacional de Taiwan começaram a pensar se haveria alguma forma de realizar este processo de forma mais barata.
-
-
-              Por mais engraçado que seja, o primeiro candidato foi uma Beyblade, seguida pelo spinner. Os testes feitos foram relativamente simples: primeiro, os pesquisadores colocaram amostras de sangue em três tubos compridos, e os prenderam a cada um dos braços do spinner. Depois, eles simplesmente giraram o spinner da mesma forma como você faria, e esperaram que ele parasse sozinho antes de girá-lo novamente. Eles realizaram este processo até conseguirem ver o tom amarelado do plasma separado.
-
-              Em média, foram necessários por volta de 7 minutos para que o plasma fosse separado, entre três e cinco movimentos do dedo para que o dispositivo gire. De acordo com os resultados do teste, aproximadamente 30% do plasma total da amostra foi filtrado, sendo que sua composição era 99% de puro plasma. Caso você ainda não esteja confiando muito, saiba que os pesquisadores realizaram o mesmo teste com uma amostra de sangue com uma proteína do vírus HIV-1, a forma mais comum da doença. Após analisar o plasma filtrado com um papel que detecta a proteína em questão, foi possível confirmar a presença do vírus.dui.
-              </p>
-              <p><a class="btn btn-default" href="https://www.tecmundo.com.br/ciencia/138216-cientistas-transformam-spinners-centrifugas-sangue.htm" role="button">View details &raquo;</a></p>
-            </div><!--/.col-xs-6.col-lg-4-->
-          </div>
-          <div class="row">
-            <div class="col-xs-6 col-lg-12">
-              <h2>Mais de 140 startups oferecem ajuda a Brumadinho após desastre da Vale</h2>
-              <h5>Publicado em: XXXXX - Autor: yyyyyyyyy</h5>
-              <img src="view/imagens/noticia3.png" align="left" vspace="10px" hspace="10px">
-              <p>Mais de 140 companhias enviaram mensagens para a Agência Brasileira de Desenvolvimento Industrial (ABDI) após a campanha da ABDI para que startups e empresas pudessem disponibilizar inteligência e tecnologias para auxiliar na tragédia gerada pelo rompimento da barragem da Vale em Brumadinho (MG).
-
-              Estamos estimando o fluxo de rejeitos e cruzando com o último sinal de GPS que uma pessoa tenha tido antes do rompimento da barragem
-
-              Especialistas das mais diversas áreas também se colocaram à disposição para ajudar. “Nesse momento, é fundamental mobilizarmos tecnologias e inteligência para atuar com agilidade em cooperação com as autoridades e equipes técnicas no local da tragédia, auxiliando nas buscas e, posteriormente, no trabalho de reconstrução das áreas atingidas”, disse Guto Ferreira, Presidente da ABDI.
-              Aplicativo de rastreamento
-
-              A BirminD, uma das startups que respondeu ao chamado da ABDI, juntou-se a outras empresas de base tecnológica para o desenvolvimento de um aplicativo. “Estamos estimando o fluxo de rejeitos e cruzando com o último sinal de GPS que uma pessoa tenha tido antes do rompimento da barragem. Com essa informação queremos estimar, levando em conta o arrasto da lama, onde a pessoa possa estar”, explica Diego Oliveira, um dos Fundadores da empresa.
-
-              A partir das fotos, nós geramos vários mapas. Com essas informações, podemos calcular a declividade do terreno e entender todo o relevo
-
-              Celulares mais modernos mapeiam, praticamente em tempo real, o deslocamento de seus usuários. Essa tecnologia deve auxiliar na busca por desaparecidos. O algoritmo, base para construção do aplicativo, começou a ser desenvolvido domingo às 9 horas. A primeira versão ficou pronta nesta segunda-feira (28), às 2h30. “Agora, nós disponibilizamos o algoritmo de forma aberta na rede para que ele seja melhorado. Qualquer um pode aprimorar”, destaca Oliveira. Como os dados de localização são sigilosos, a ideia é que as empresas de telefonia utilizem o aplicativo para ajudar as equipes de salvamento.
-              Drones em busca de sobreviventes
-
-              Uma empresa que oferece serviço de monitoramento por drones também se colocou à disposição da ABDI. As câmeras de alta resolução podem fazer um modelo digital da área, explica o Diretor de Engenharia da Nong, Gabriel Postiglione: “A partir das fotos, nós geramos vários mapas. Com essas informações, podemos calcular a declividade do terreno e entender todo o relevo. Em uma operação de resgate, conhecer a declividade é fundamental, podemos direcionar a melhor entrada e como andar no terreno”.
-
-              Estamos apelando ao espírito solidário do nosso ecossistema de empreendedorismo e inovação para um verdadeiro mutirão cívico de ajuda à cidade de Brumadinho
-
-              As câmaras multiespectrais, embarcadas nos drones, permitem o desenho preciso do terreno. Segundo Postiglione, os equipamentos também poderiam ajudar na visualização do local. “As câmeras, voando a 200 metros, conseguem observar, com boa resolução, objetos à cinco centímetros do chão”, relata.
-
-              A ABDI vai continuar recebendo mensagens de empresas que possam ajudar em Brumadinho. Todas as informações estão sendo compiladas e repassadas para as autoridades competentes. “Estamos apelando ao espírito solidário do nosso ecossistema de empreendedorismo e inovação para um verdadeiro mutirão cívico de ajuda à cidade de Brumadinho”, destaca Guto Ferreira. 
-</p>
-              <p><a class="btn btn-default" href="https://www.tecmundo.com.br/mercado/138240-140-startups-oferecem-ajuda-brumadinho-desastre-vale.htm" role="button">View details &raquo;</a></p>
-            </div><!--/.col-xs-6.col-lg-4-->
-          </div>
-          <div class="row">
-            <div class="col-xs-6 col-lg-12">
-              <h2>xxxxxxx</h2>
-              <p>xxxxxxxxxxx</p>
-              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-            </div><!--/.col-xs-6.col-lg-4-->
-          </div>
+      
+      <?php
+      }
+      ?>
         </div><!--/.col-xs-12.col-sm-9-->
 
         <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
           <div class="list-group">
             <a href="#" class="list-group-item active">Newsletter</a>
-            <form class="form-signin" action="#" method="POST">
+            <form class="form-signin" action="controller/controllerNewsletter.php" method="POST">
                <div class="col-md-12">
                 <div class="row"><br>
                   <div class="col-md-10">
@@ -179,7 +132,7 @@
                 <div class="row">
                   <div class="col-md-10">
                     <div class="checkbox">
-                      <input type="checkbox" name="" id="email" required>Desejo Receber
+                      <input type="checkbox" name="desejaReceber" value="1" id="desejaReceber">Desejo Receber
                     </div>
                   </div>             
                 </div>
@@ -188,25 +141,14 @@
             </form>  
           </div>  
         </div><!--/.sidebar-offcanvas-->
-        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
-          <div class="list-group">
-            <a href="#" class="list-group-item active">Mais lidas</a>
-            <a href="#" class="list-group-item">Cientistas criam sistema que envia sons só ouvidos pelo receptor</a>
-            <a href="#" class="list-group-item">Cientistas transformam spinners em centrífugas para bancos de sangue</a>
-            <a href="#" class="list-group-item">Mais de 140 startups oferecem ajuda a Brumadinho após desastre da Vale</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-          </div>  
-        </div><!--/.sidebar-offcanvas-->
+
+      <?php
+        include ("view/maisLidas.php");
+      ?>
+      
 
     </div> <!-- /container -->
-
-
-    <!-- Bootstrap core JavaScript
+        <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
