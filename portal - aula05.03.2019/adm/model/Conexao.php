@@ -1,0 +1,3 @@
+<?php
+//Classe para conexao
+?>
